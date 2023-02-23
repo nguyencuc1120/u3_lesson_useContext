@@ -151,7 +151,7 @@ function App() {
   const [userInfo, setUserInfo] = useState({
     name: 'Jeremy',
     favColor: 'blue',
-    favFood: 'chicken parmesean'
+    favFood: 'chicken parmesean',
     favMovie: 'Goodfellas'
   });
 
@@ -190,6 +190,7 @@ Use destructuring to create two variables from the the object in Context.
 ```jsx
 import React, { useContext } from "react";
 import { DataContext } from "../DataContext";
+import ComponentB from './ComponentB'
 
 function ComponentA() {
   const { userInfo, setUserInfo } = useContext(DataContext);
@@ -209,6 +210,18 @@ function ComponentA() {
           })}>
         Change to Green
       </button>
+      
+      <button
+        onClick={() =>
+          setUserInfo({
+            ...userInfo, favColor: "blue"
+          })}>
+        Change back to Blue
+      </button>
+      
+      
+      <ComponentB/>
+      
     </div>
   );
 ```
@@ -272,6 +285,7 @@ function ComponentC() {
       <h2>This is Component C</h2>
     
         <p style= {{color: userInfo.favColor}}> {userInfo.name}'s favorite movie is {userInfo.favMovie}</p> 
+        <p> and their favorite food is {userInfo.favFood} </p>
 
       
       <button
@@ -301,6 +315,8 @@ function ComponentC() {
   );
 ```
 
+Lets update Component D, a child of Component C, which is a sibling of Component A. Look at how each component is working together being changed with Context!
+
 ```jsx
 import { useContext } from "react";
 import { DataContext } from "./DataContext";
@@ -309,12 +325,10 @@ function Component D() {
   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
     <div>
-      <h2>This is Component B</h2>
+      <h2>This is Component D</h2>
       
         <p>{userInfo.name}'s favorite food is </p>
-        <p style={{ color: userInfo.favColor }}>
-            {userInfo.favFood}
-            </p>.
+        <p style={{ color: userInfo.favColor }}> {userInfo.favFood} </p>
    
       
       <button
@@ -322,6 +336,7 @@ function Component D() {
           setUserInfo({
             ...userInfo,
             favColor: "brown"
+            favMovie: "Airplane!"
           })
         }
       >
@@ -333,14 +348,15 @@ function Component D() {
           setUserInfo({
             ...userInfo,
             favMovie: "Big Lebowski"
+            name: "Mr Taubman"
           })
         }
       >
-        Change Movie
+        Change Movie and Name
       </button>
       
       
-      <ComponentD/>
+ 
       
     </div>
   );
