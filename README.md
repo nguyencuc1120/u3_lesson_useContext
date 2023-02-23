@@ -131,6 +131,7 @@ Data Context is pretty small, but it packs a whole bunch of power.
 ```js
 DataContext.jsx
 
+import React from 'react'
 export const DataContext = React.createContext();
 // It returns an object with 2 values:
 // { Provider, Consumer }
@@ -139,6 +140,12 @@ export const DataContext = React.createContext();
 Then the decision is made as to which child Components would need access to the Provider. The data can be made accessible to all child Components. The data to be passed is stored in a prop called `value`.
 
 ```js
+
+import { useState, useContext } from 'react'
+import ComponentA from './components/ComponentA'
+import ComponentB from './components/ComponentB'
+import DataContext from './DataContext'
+
 function App() {
   // DATA TO BE PASSED BY PROVIDER
   const [userInfo, setUserInfo] = useState({
@@ -177,38 +184,12 @@ import { DataContext } from './DataContext';
 
 The `useContext` Hook lets us get at the data in the Context provider even if our component is not a direct child of the provider (it must be a descendant of the provider, but it can be nested any number of levels below it). To consume the data, we create a local variable to store the data, and assign it the return value of the useContext Hook when passed the context:
 
-```jsx
-import { useContext } from 'react';
-import { DataContext } from './DataContext';
-
-function ComponentA() {
-  const data = useContext(DataContext);
-  return (
-    <div>
-      <h2>This is Component A</h2>
-      <p>
-        <span>{data.userInfo.name}'s favorite color is </span>
-        <span style={{ color: data.userInfo.favColor }}>
-          {data.userInfo.favColor}
-        </span>.
-      </p>
-    </div>
-  );
-}
-
-export default ComponentA;
-```
-
-How can we improve this with destructuring? How can we update the data?
-
-<details>
-  <summary>Solution</summary>
 
 Use destructuring to create two variables from the the object in Context.
 
 ```jsx
-import { useContext } from "react";
-import { DataContext } from "./DataContext";
+import React, { useContext } from "react";
+import { DataContext } from "../DataContext";
 
 function ComponentA() {
   const { userInfo, setUserInfo } = useContext(DataContext);
@@ -219,27 +200,26 @@ function ComponentA() {
         <p>{userInfo.name}'s favorite color is </p>
         <p style={{ color: userInfo.favColor }}>{userInfo.favColor}</p>.
       </p>
+      
+      
       <button
         onClick={() =>
           setUserInfo({
-            ...userInfo,
-            favColor: "green"
-          })
-        }
-      >
+            ...userInfo, favColor: "green"
+          })}>
         Change to Green
       </button>
     </div>
   );
 ```
 
-</details>
+
 
 Lets see what we can do with context between our components: 
 
 ```jsx
-import { useContext } from "react";
-import { DataContext } from "./DataContext";
+import React, { useContext } from "react";
+import { DataContext } from "../DataContext";
 
 function ComponentB() {
   const { userInfo, setUserInfo } = useContext(DataContext);
@@ -276,19 +256,22 @@ function ComponentB() {
   );
 ```
 
+We've got our information now passing 2 levels up the tree. Lets work on Components C and D and now move both Vertically, and Horizontally, something we could Not do just using props and state!
 
+And lets use our buttons to update 2 peices of data, using our Spread Operators to keep everything else in state!
 
 ```jsx
-import { useContext } from "react";
-import { DataContext } from "./DataContext";
+import React, { useContext } from "react";
+import { DataContext } from "../DataContext"
+import ComponentD from './ComponentD'
 
 function ComponentC() {
   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
     <div>
-      <h2>This is Component D</h2>
+      <h2>This is Component C</h2>
     
-        <p>{userInfo.name}'s favorite movie is {userInfo.favMovie}</p>.
+        <p style= {{color: userInfo.favColor}}> {userInfo.name}'s favorite movie is {userInfo.favMovie}</p> 
 
       
       <button
@@ -322,7 +305,7 @@ function ComponentC() {
 import { useContext } from "react";
 import { DataContext } from "./DataContext";
 
-function ComponentB() {
+function Component D() {
   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
     <div>
@@ -355,6 +338,10 @@ function ComponentB() {
       >
         Change Movie
       </button>
+      
+      
+      <ComponentD/>
+      
     </div>
   );
 ```
