@@ -274,7 +274,7 @@ function ComponentA() {
 
 
 
-Lets see what we can do with context between our components: 
+Lets see what we can do with context between our components. You'll see that Components B, C, and D have very similar code commented out. Lets bring it in and see how they work one by one: 
 
 ```jsx
 import React, { useContext } from "react";
