@@ -211,6 +211,27 @@ In our Return, lets render some data!
 </div>
 ```
 
+Woah! We've got 2 pieces of our User Data working in our ComponentA, but there aren't any props! How cool is that!?
+
+Lets add a bit more functionality into this component, and then work in our other 3 components
+
+Add a button that changes our user's favorite color to Green instead of Blue
+
+```jsx
+ <button
+        onClick={() =>
+          setUserInfo({
+            ...userInfo, favColor: "green"
+          })}>
+        Change to Green
+      </button>
+```
+
+And look at that, our state has changed! 
+
+Can we add in a 2nd button to change the color back?
+
+
 
 ```jsx
 import React, { useContext } from "react";
