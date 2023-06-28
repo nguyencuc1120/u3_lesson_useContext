@@ -122,8 +122,7 @@ Both require the same setup for the provider.
 `React.createContext()` will be created in the parent Component and then it will use `.Provider` to pass the data using the `value` prop. Since context is meant to provide and make accessible data at a more global level it must be exported from the parent and then imported by any children that need to access the data.
 
 
-- Lets touch 5 files - DataContext.jsx, and then in a components subfolder, touch Components A, B, C, and D.
-- Nest component B inside of Component A, Component D inside of Component C,  then nest Components A and C inside of App.  You should have 2 parent components on your screen, each nesting 1 child component.
+- In SRC,  touch a DataContext.jsx, 
 
 Data Context's file is pretty small, but it packs a whole bunch of power. 
 
@@ -142,7 +141,7 @@ Then the decision is made as to which child Components would need access to the 
 
 import { useState, useContext } from 'react'
 import ComponentA from './components/ComponentA'
-import ComponentC from './components/ComponentC'
+import ComponentB from './components/ComponentC'
 import DataContext from './DataContext'
 
 function App() {
@@ -159,7 +158,7 @@ function App() {
       <h2>React Context..using useContext</h2>
       <DataContext.Provider value={{ userInfo, setUserInfo }}>
         <ComponentA />
-        <ComponentC />
+        <ComponentB />
       </DataContext.Provider>
     </div>
   );
@@ -189,7 +188,7 @@ Use destructuring to create two variables from the the object in Context.
 ```jsx
 import React, { useContext } from "react";
 import { DataContext } from "../DataContext";
-import ComponentB from './ComponentB'
+import ComponentC from './ComponentC'
 
 function ComponentA() {
   const { userInfo, setUserInfo } = useContext(DataContext);
@@ -219,7 +218,7 @@ function ComponentA() {
       </button>
       
       
-      <ComponentB/>
+      <ComponentC/>
       
     </div>
   );
@@ -232,8 +231,9 @@ Lets see what we can do with context between our components:
 ```jsx
 import React, { useContext } from "react";
 import { DataContext } from "../DataContext";
+import { ComponentC } from './components/ComponentC'
 
-function ComponentB() {
+export default function ComponentB() {
   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
     <div>
@@ -266,6 +266,7 @@ function ComponentB() {
       </button>
     </div>
   );
+};
 ```
 
 We've got our information now passing 2 levels up the tree. Lets work on Components C and D and now move both Vertically, and Horizontally, something we could Not do just using props and state!
