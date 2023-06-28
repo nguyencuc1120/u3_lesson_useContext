@@ -4,7 +4,7 @@ import { DataContext } from "../DataContext"
 function ComponentC() {
   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
-    <div>
+    <div className="card">
       <h2>This is Component C</h2>
       <ul>
         <li>Child of ComponentA</li>

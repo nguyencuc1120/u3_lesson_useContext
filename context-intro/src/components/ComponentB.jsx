@@ -6,7 +6,7 @@ import ComponentD from './ComponentD'
 export default function ComponentB() {
 //   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
-    <div>
+    <div className="card">
       <h2>This is Component B</h2>
       <ul>
         <li>Child of App</li>
