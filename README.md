@@ -266,7 +266,7 @@ function ComponentA() {
       </button>
       
       
-      <ComponentC/>
+
       
     </div>
   );
@@ -317,9 +317,9 @@ export default function ComponentB() {
 };
 ```
 
-We've got our information now passing 2 levels up the tree. Lets work on Components C and D and now move both Vertically, and Horizontally, something we could Not do just using props and state!
+Woah! Our siblings are now changing each others' states, but there aren't any props involved with either! Can we take it a step further and move both Vertically, and Horizontally in Components C and D, something we could Not do just using props and state?
 
-And lets use our buttons to update 2 peices of data, using our Spread Operators to keep everything else in state!
+And, lets use our buttons to update 2 peices of data, using our Spread Operators to keep everything else in state!
 Once we have this done, make sure ComponentA is set up to nest this and render it
 
 ```jsx
