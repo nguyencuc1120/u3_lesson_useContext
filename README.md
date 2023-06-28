@@ -24,7 +24,7 @@ By the end of this, developers should be able to:
 
 Context provides a way to share values between components without having to explicitly pass a prop through every level of the tree. An analogy you can use to compare props and context is: Props is like buying a product from a retailer whereas Context is like buying directly from the manufacturer. Going through a retailer can add several additional steps to the process with the retailer, distributors and transporters in between you and the product manufacturer.
 
-"Context" in React predates the use of Hooks, so we are going to be learning the Current way of doing it, and at the end we will take a minute to see the other, outdated way of doing it, detailing one reason that Hooks are so important and useful
+"Context" in React predates the use of Hooks, so we are going to be learning the Current way of doing it, detailing one reason that Hooks are so important and useful
 
 ### Data Flow in React
 
@@ -127,7 +127,7 @@ Both require the same setup for the provider.
 Data Context's file is pretty small, but it packs a whole bunch of power. 
 
 ```js
-DataContext.jsx
+//DataContext.jsx
 
 import React from 'react'
 export const DataContext = React.createContext();
@@ -184,6 +184,32 @@ The `useContext` Hook lets us get at the data in the Context provider even if ou
 
 
 Use destructuring to create two variables from the the object in Context.
+
+```jsx
+import React, { useContext } from "react";
+import { DataContext } from "../DataContext";
+```
+
+Then, we want to set up, and destructure, our user object held in context. This goes above the Return statement of course:
+
+```jsx
+   const { userInfo, setUserInfo } = useContext(DataContext);
+```
+
+
+In our Return, lets render some data!
+
+```jsx
+
+<div>
+      <h2>This is Component A</h2>
+      <p>
+        <p>{userInfo.name}'s favorite color is </p>
+        <p style={{ color: userInfo.favColor }}>{userInfo.favColor}</p>
+      </p>
+</div>
+```
+
 
 ```jsx
 import React, { useContext } from "react";
