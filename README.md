@@ -141,7 +141,7 @@ Then the decision is made as to which child Components would need access to the 
 
 import { useState, useContext } from 'react'
 import ComponentA from './components/ComponentA'
-import ComponentB from './components/ComponentC'
+import ComponentB from './components/ComponentB'
 import DataContext from './DataContext'
 
 function App() {
