@@ -18,7 +18,7 @@ By the end of this, developers should be able to:
 - Explain what Providers and Consumers are and what they do
 - Implement a shared context to avoid prop drilling
 
-In this demo we will be using [CodeSandbox](https://codesandbox.io/) (like CodePen but made for React).
+
 
 ## What is Context?
 
@@ -231,7 +231,7 @@ Lets see what we can do with context between our components:
 ```jsx
 import React, { useContext } from "react";
 import { DataContext } from "../DataContext";
-import { ComponentC } from './components/ComponentC'
+import { ComponentD } from './components/ComponentD'
 
 export default function ComponentB() {
   const { userInfo, setUserInfo } = useContext(DataContext);
@@ -272,13 +272,14 @@ export default function ComponentB() {
 We've got our information now passing 2 levels up the tree. Lets work on Components C and D and now move both Vertically, and Horizontally, something we could Not do just using props and state!
 
 And lets use our buttons to update 2 peices of data, using our Spread Operators to keep everything else in state!
+Once we have this done, make sure ComponentA is set up to nest this and render it
 
 ```jsx
 import React, { useContext } from "react";
 import { DataContext } from "../DataContext"
-import ComponentD from './ComponentD'
 
-function ComponentC() {
+
+export default function ComponentC() {
   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
     <div>
@@ -313,15 +314,16 @@ function ComponentC() {
       </button>
     </div>
   );
+}
 ```
 
-Lets update Component D, a child of Component C, which is a sibling of Component A. Look at how each component is working together being changed with Context!
+Lets update Component D, a child of Component B, which is a sibling of Component A. Look at how each component is working together being changed with Context!
 
 ```jsx
 import { useContext } from "react";
 import { DataContext } from "./DataContext";
 
-function Component D() {
+export default function Component D() {
   const { userInfo, setUserInfo } = useContext(DataContext);
   return (
     <div>
@@ -355,11 +357,9 @@ function Component D() {
         Change Movie and Name
       </button>
       
-      
- 
-      
     </div>
-  );
+  )
+};
 ```
 
 
