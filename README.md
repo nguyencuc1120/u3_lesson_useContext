@@ -130,7 +130,8 @@ Data Context's file is pretty small, but it packs a whole bunch of power.
 //DataContext.jsx
 
 import React from 'react'
-export const DataContext = React.createContext();
+const DataContext = React.createContext()
+export default DataContext
 // It returns an object with 2 values:
 // { Provider, Consumer }
 ```
@@ -177,7 +178,7 @@ Additionally, we need to import the context that we want to use:
 
 ```js
 // Import the context
-import { DataContext } from './DataContext';
+import  DataContext  from './DataContext';
 ```
 
 The `useContext` Hook lets us get at the data in the Context provider even if our component is not a direct child of the provider (it must be a descendant of the provider, but it can be nested any number of levels below it). To consume the data, we create a local variable to store the data, and assign it the return value of the useContext Hook when passed the context:
@@ -187,7 +188,7 @@ Use destructuring to create two variables from the the object in Context.
 
 ```jsx
 import React, { useContext } from "react";
-import { DataContext } from "../DataContext";
+import DataContext  from "../DataContext";
 ```
 
 Then, we want to set up, and destructure, our user object held in context. This goes above the Return statement of course:
@@ -213,7 +214,7 @@ In our Return, lets render some data!
 
 ```jsx
 import React, { useContext } from "react";
-import { DataContext } from "../DataContext";
+import  DataContext from "../DataContext";
 import ComponentC from './ComponentC'
 
 function ComponentA() {
@@ -256,7 +257,7 @@ Lets see what we can do with context between our components:
 
 ```jsx
 import React, { useContext } from "react";
-import { DataContext } from "../DataContext";
+import  DataContext  from "../DataContext";
 import { ComponentD } from './components/ComponentD'
 
 export default function ComponentB() {
@@ -302,7 +303,7 @@ Once we have this done, make sure ComponentA is set up to nest this and render i
 
 ```jsx
 import React, { useContext } from "react";
-import { DataContext } from "../DataContext"
+import  DataContext  from "../DataContext"
 
 
 export default function ComponentC() {
@@ -347,7 +348,7 @@ Lets update Component D, a child of Component B, which is a sibling of Component
 
 ```jsx
 import { useContext } from "react";
-import { DataContext } from "./DataContext";
+import  DataContext  from "./DataContext";
 
 export default function Component D() {
   const { userInfo, setUserInfo } = useContext(DataContext);
