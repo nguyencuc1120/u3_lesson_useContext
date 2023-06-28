@@ -289,6 +289,7 @@ export default function ComponentB() {
       <p>
         <p>{userInfo.name}'s favorite color is </p>
         <p style={{ color: userInfo.favColor }}>{userInfo.favColor}</p>
+        <p> and they love eating {userInfo.favFood}
       </p>
       
       <button
@@ -311,6 +312,18 @@ export default function ComponentB() {
         }
       >
         Change to Pink
+      </button>
+
+
+      <button
+        onClick={() =>
+          setUserInfo({
+            ...userInfo,
+            userName: "Jeremy T"
+          })
+        }
+      >
+        Change Name
       </button>
     </div>
   );
