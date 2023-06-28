@@ -3,7 +3,7 @@
 export default function ComponentA () {
     return (
         <div className="card">
-            <h2> I am component A</h2>
+            <h2>This is component A</h2>
         </div>
 
     )
