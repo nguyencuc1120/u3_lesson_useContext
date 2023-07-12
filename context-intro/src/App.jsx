@@ -1,8 +1,18 @@
+import { useState, useContext } from 'react'
+import DataContext from './DataContext'
 import ComponentA from './components/ComponentA'
 import ComponentB from './components/ComponentB'
 import './App.css'
 
 function App() {
+
+//creating a user
+const [userInfo, setUserInfo] = useState({
+  name:'Jenny',
+  favColor: 'green',
+  favFood: 'sushi'
+})
+
   return (
   
       <div className="app">
@@ -11,8 +21,11 @@ function App() {
         </div>
 
         <div className="main">
-          <ComponentA/>
-          <ComponentB/>
+          <DataContext.Provider value={{
+            userInfo, setUserInfo }}>
+            <ComponentA/>
+            <ComponentB/>
+          </DataContext.Provider>
         </div>
  </div>
   )
